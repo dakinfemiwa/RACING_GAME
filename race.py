@@ -63,7 +63,7 @@ def clock():
     timing = 0
     while pos != 6:
         time.sleep(0.001)
-        timing += (0.002 * (10/7))
+        timing += (0.02 * (10/7))
 
 def close():
     date = datetime.datetime.today()
