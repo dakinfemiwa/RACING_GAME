@@ -175,7 +175,7 @@ def countDown1():
 
 lbl = Label()
 lbl.place(relx=.4, rely=.35)
-lbl2 = Label(file, text="Press space to move the red car", font='fixedsys 15', bg=bg2)
+lbl2 = Label(file, text="Press space to move the red car", font='fixedsys 15', bg=background)
 lbl2.place(relx=.32, rely=.5)
 countDown1()
 
