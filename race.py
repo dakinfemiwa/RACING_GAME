@@ -5,6 +5,7 @@ from tkinter import *
 import random
 import datetime
 import time
+import math
 
 def LeaderBoard():
     global leaderboard, cars
@@ -14,7 +15,7 @@ def LeaderBoard():
     leaderboard = Tk()
     leaderboard.overrideredirect(1)
     leaderboard.title("Leaderboard")
-    leaderboard.geometry("250x174+100+100")
+    leaderboard.geometry("300x174+100+100")
     leaderboard.config(bg=bg2)
     ranking = []
 
@@ -23,8 +24,10 @@ def LeaderBoard():
 
     for x in range(0, len(cars)):
         for y in range(0, len(cars)):
-            if cars[y][3] == x + 1:
-                ranking.append("Car No " + str(cars[y][0]))
+            if cars[y][4] == x + 1:
+                ranking.append([])
+                ranking[x].append("Car No " + str(cars[y][0]))
+                ranking[x].append(cars[y][3])
 
     #print(ranking)
 
@@ -35,22 +38,32 @@ def LeaderBoard():
         no = Label(leaderboard, text="  " + str(x+1)+ "  ", font=font, background=bg2, foreground="white")
         no.grid(row=x+1, column=0, sticky="NSEW", rowspan=1, columnspan=2)
 
-        if ranking[x] != "Car No 2" :
-            car = Label(leaderboard, text=ranking[x], font=font, background=bg2, foreground="white", anchor=W)
+        if ranking[x][0] != "Car No 2" :
+            car = Label(leaderboard, text=ranking[x][0], font=font, background=bg2, foreground="white", anchor=W)
             car.grid(row=x+1, column=2, sticky="NSEW", rowspan=1, columnspan=1)
         else:
             car = Label(leaderboard, text="You", font=font, background=bg2, foreground="white", anchor=W)
             car.grid(row=x+1, column=2, sticky="NSEW", rowspan=1, columnspan=1)
 
+        carTimes = Label(leaderboard, text=ranking[x][1], font=font, background=bg2, foreground="white", anchor=W)
+        carTimes.grid(row=x+1, column=3, sticky="NSEW", rowspan=1, columnspan=1)
+
     leaderboard.mainloop()
+
 
 def move(event):
     if event.keysym == "space":
-        if cars[1][1] < (.925*1250):
-            xChange = 25
+        if cars[1][1] < (.975*1250):
+            xChange = random.randint(19, 23)
             gameCanvas.move(cars[1][0], xChange, 0)
             cars[1][1] += xChange
 
+def clock():
+    global timing
+    timing = 0
+    while pos != 6:
+        time.sleep(0.001)
+        timing += (0.002 * (10/7))
 
 def close():
     date = datetime.datetime.today()
@@ -63,27 +76,47 @@ def close():
 
 def play():
     global pos
-    value = 0
+    #initialTime = time.clock()
+    #print(initialTime)
 
     while True:
         time.sleep(0.15)
         for car in cars:
             if car[1] < (.97*1250):
                 if cars.index(car) != 1:
-                    change = random.randint(21, 29)
+                    change = random.randint(10, 40)
                     gameCanvas.move(car[0], change, 0)
                     car[1] += change
                     #print(cars)
             if car[1] >= (.925*1250):
                 if len(car) == 3:
                     pos += 1
+                    timStr = str(round(timing, 2))
+                    for x in range(0, len(timStr)):
+                        if timStr[x] == ".":
+                            break;
+
+                    section = timStr[x+1:len(timStr)]
+                    if len(section) == 1:
+                        timStr + "0"
+
+
+                    car.append(timStr)
                     car.append(pos)
             if pos == 6:
                 LeaderBoard()
                 break;
 
+title="COUNTDOWN"
+background="black"
+background2= "gray"
+
+
+
+
 title = "RACERS"
 background = "lightgray"
+background2= "black"
 bg2 = "#7A7A7A"
 pos = 0
 
@@ -124,15 +157,30 @@ for car in range(0, 7):
 
 #print(cars)
 
-
-
 startLine = Canvas(gameCanvas, width=1, height=500)
 startLine.place(relx=.05, rely=.0)
 
 crossLine = Canvas(gameCanvas, width=1, height=500)
 crossLine.place(relx=.975, rely=.0)
 
+def countDown1():
+    lbl.config(bg=background)
+    lbl.config(foreground="white", font=('fixedsys 60'))
+    for k in range(3, 0, -1):
+        lbl["text"] = str(k)
+        file.update()
+        time.sleep(1)
+    lbl.destroy()
+    lbl2.destroy()
+
+lbl = Label()
+lbl.place(relx=.4, rely=.35)
+lbl2 = Label(file, text="Press space to move the red car", font='fixedsys 15', bg=bg2)
+lbl2.place(relx=.32, rely=.5)
+countDown1()
+
 file.bind("<KeyRelease>", move)
 
 threading.Thread(target=play, args=()).start()
+threading.Thread(target=clock, args=()).start()
 threading.Thread(target=file.mainloop(), args=()).start()
