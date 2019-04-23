@@ -54,7 +54,7 @@ def LeaderBoard():
 def move(event):
     if event.keysym == "space":
         if cars[1][1] < (.975*1250):
-            xChange = random.randint(19, 23)
+            xChange = random.randint(23, 30)
             gameCanvas.move(cars[1][0], xChange, 0)
             cars[1][1] += xChange
 
@@ -62,7 +62,7 @@ def clock():
     global timing
     timing = 0
     while pos != 6:
-        time.sleep(0.001)
+        time.sleep(0.01)
         timing += (0.02 * (10/7))
 
 def close():
@@ -80,11 +80,11 @@ def play():
     #print(initialTime)
 
     while True:
-        time.sleep(0.15)
+        time.sleep(0.002)
         for car in cars:
             if car[1] < (.97*1250):
                 if cars.index(car) != 1:
-                    change = random.randint(10, 40)
+                    change = random.randint(1, 5)
                     gameCanvas.move(car[0], change, 0)
                     car[1] += change
                     #print(cars)
@@ -176,7 +176,7 @@ def countDown1():
 lbl = Label()
 lbl.place(relx=.4, rely=.35)
 lbl2 = Label(file, text="Press space to move the red car", font='fixedsys 15', bg=background)
-lbl2.place(relx=.32, rely=.5)
+lbl2.place(relx=.32, rely=.49)
 countDown1()
 
 file.bind("<KeyRelease>", move)
