@@ -5,6 +5,7 @@ import os
 import urllib.request
 
 def playMultiOff():
+    """"
     link = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/raceMultiplayerOffline.py"
     name = "raceMP.py"
 
@@ -14,8 +15,12 @@ def playMultiOff():
 
     os.system("cd " + x)
     os.system(name)
+    """
+    name = "raceMultiplayerOffline.py"
+    os.system(name)
 
 def playSingular():
+    """
     link = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/race.py"
     name = "raceP.py"
 
@@ -24,6 +29,9 @@ def playSingular():
     x = os.getcwd()
 
     os.system("cd " + x)
+    """
+
+    name = "race.py"
     os.system(name)
 
 playSingularText = "      PLAY SINGULAR      "
