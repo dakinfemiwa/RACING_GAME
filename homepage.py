@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 import os
 import urllib.request
+from updater import Updater
 
 def playMultiOff():
     """"
