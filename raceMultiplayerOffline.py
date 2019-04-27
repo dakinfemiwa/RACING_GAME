@@ -128,7 +128,7 @@ background="black"
 background2= "gray"
 
 
-instructions = "Press Q to move the top car\nPress M to move the bottom car"
+instructions = "Press M to move the top car\nPress Q to move the bottom car"
 
 title = "RACERS"
 background = "lightgray"
