@@ -64,13 +64,13 @@ def LeaderBoard():
 
 
 def move(event):
-    if event.keysym.upper() == "Q":
+    if event.keysym.upper() == "M":
         if cars[1][1] < (.975*1250):
             xChange = random.randint(19, 23)
             gameCanvas.move(cars[1][0], xChange, 0)
             cars[1][1] += xChange
 
-    if event.keysym.upper() == "M":
+    if event.keysym.upper() == "Q":
         if cars[0][1] < (.975*1250):
             xChange = random.randint(19, 23)
             gameCanvas.move(cars[0][0], xChange, 0)
@@ -128,7 +128,7 @@ background="black"
 background2= "gray"
 
 
-instructions = "Press M to move the top car\nPress Q to move the bottom car"
+instructions = "Press Q to move the top car\nPress M to move the bottom car"
 
 title = "RACERS"
 background = "lightgray"
