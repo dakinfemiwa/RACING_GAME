@@ -52,9 +52,9 @@ def LeaderBoard():
 
 
 def move(event):
-    if event.keysym == "space":
+    if event.keysym.upper() == "M":
         if cars[1][1] < (.975*1250):
-            xChange = random.randint(23, 30)
+            xChange = random.randint(30, 35)
             gameCanvas.move(cars[1][0], xChange, 0)
             cars[1][1] += xChange
 
@@ -80,7 +80,7 @@ def play():
     #print(initialTime)
 
     while True:
-        time.sleep(0.002)
+        time.sleep(0.006)
         for car in cars:
             if car[1] < (.97*1250):
                 if cars.index(car) != 1:
@@ -175,7 +175,7 @@ def countDown1():
 
 lbl = Label()
 lbl.place(relx=.4, rely=.35)
-lbl2 = Label(file, text="Press space to move the red car", font='fixedsys 15', bg=background)
+lbl2 = Label(file, text="Press M to move the red car", font='fixedsys 15', bg=background)
 lbl2.place(relx=.32, rely=.49)
 countDown1()
 
