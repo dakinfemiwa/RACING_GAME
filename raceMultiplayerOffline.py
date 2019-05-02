@@ -80,8 +80,9 @@ def clock():
     global timing
     timing = 0
     while pos != 2:
-        time.sleep(0.001)
+        time.sleep(0.01)
         timing += (0.02 * (10/8))
+        print(timing)
         timing = round(timing, 2)
         if pos != 1:
             timeLabel['text'] = timing
