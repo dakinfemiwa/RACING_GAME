@@ -10,16 +10,21 @@ import math
 def LeaderBoard():
     global leaderboard, cars
 
-    bg2 = "#000000"
+    bg2 = "#101010"
+    fg2 = "orange"
 
     leaderboard = Tk()
     leaderboard.overrideredirect(1)
     leaderboard.title("Leaderboard")
-    leaderboard.geometry("300x174+100+100")
+    leaderboard.geometry("300x174+500+300")
     leaderboard.config(bg=bg2)
     ranking = []
 
-    font= "Fixedsys 15"
+    """
+    font= "Segoe 10"
+    font2= "Segoe 12 bold"
+    """
+    font = "Fixedsys 15"
     font2= "Fixedsys 20 bold"
 
     for x in range(0, len(cars)):
@@ -31,21 +36,21 @@ def LeaderBoard():
 
     #print(ranking)
 
-    titleLabel = Label(leaderboard, text=" LEADERBOARD ", font=font2, background=bg2, foreground="white", anchor=CENTER , justify=CENTER)
+    titleLabel = Label(leaderboard, text=" LEADERBOARD ", font=font2, background=bg2, foreground=fg2, anchor=CENTER , justify=CENTER)
     titleLabel.grid(row=0, column=0, columnspan=3, rowspan=1)
 
     for x in range(0, len(ranking)):
-        no = Label(leaderboard, text="  " + str(x+1)+ "  ", font=font, background=bg2, foreground="white")
+        no = Label(leaderboard, text="  " + str(x+1)+ "  ", font=font, background=bg2, foreground=fg2)
         no.grid(row=x+1, column=0, sticky="NSEW", rowspan=1, columnspan=2)
 
         if ranking[x][0] != "Car No 2" :
-            car = Label(leaderboard, text=ranking[x][0], font=font, background=bg2, foreground="white", anchor=W)
+            car = Label(leaderboard, text=ranking[x][0], font=font, background=bg2, foreground=fg2, anchor=W)
             car.grid(row=x+1, column=2, sticky="NSEW", rowspan=1, columnspan=1)
         else:
-            car = Label(leaderboard, text="You", font=font, background=bg2, foreground="white", anchor=W)
+            car = Label(leaderboard, text="You", font=font, background=bg2, foreground=fg2, anchor=W)
             car.grid(row=x+1, column=2, sticky="NSEW", rowspan=1, columnspan=1)
 
-        carTimes = Label(leaderboard, text=ranking[x][1], font=font, background=bg2, foreground="white", anchor=W)
+        carTimes = Label(leaderboard, text=ranking[x][1], font=font, background=bg2, foreground=fg2, anchor=W)
         carTimes.grid(row=x+1, column=3, sticky="NSEW", rowspan=1, columnspan=1)
 
     leaderboard.mainloop()
@@ -64,6 +69,9 @@ def clock():
     while pos != 6:
         time.sleep(0.01)
         timing += (0.02 * (10/7))
+        timing = round(timing, 2)
+        if pos != 1:
+            timeLabel['text'] = timing        
 
 def close():
     date = datetime.datetime.today()
@@ -84,7 +92,8 @@ def play():
         for car in cars:
             if car[1] < (.97*1250):
                 if cars.index(car) != 1:
-                    change = random.randint(1, 5)
+                    change = random.randint(1, 48)
+                    change /= 10
                     gameCanvas.move(car[0], change, 0)
                     car[1] += change
                     #print(cars)
@@ -115,8 +124,9 @@ background2= "gray"
 
 
 title = "RACERS"
-background = "lightgray"
+background = "black"
 background2= "black"
+foreground = "white"
 bg2 = "#7A7A7A"
 pos = 0
 
@@ -126,11 +136,13 @@ file.geometry("1250x650+10+50")
 file.overrideredirect(1)
 file.config(bg=background)
 
-exitButton = Button(file, text= " ✖ ", command = close, font="Arial 20", bd=0, background="black", foreground="white", cursor="hand2")
-exitButton.place(relx=.95, rely=.0)
+exitButton = Button(file, text= " × ", command = close, font="Arial 35", bd=0, background="black", foreground="white", cursor="hand2")
+exitButton.config(activebackground=background, activeforeground="lightgray")
+exitButton.place(relx=.95, rely=-.025)
 
-fileTitle = Label(file, text=title, background=background, font="Arial 29 bold underline")
-fileTitle.place(relx=.0, rely=.0)
+fileTitle = Label(file, text=title, background=background, font="Segoe 29")
+fileTitle.config(fg="white")
+fileTitle.place(relx=.0, rely=.025)
 
 gameCanvas = Canvas(file, width=1250, height=500, background=bg2, bd=0)
 gameCanvas.place(relx=.0, rely=.1)
@@ -176,8 +188,13 @@ def countDown1():
 lbl = Label()
 lbl.place(relx=.4, rely=.35)
 lbl2 = Label(file, text="Press M to move the red car", font='fixedsys 15', bg=background)
+lbl2.config(fg="white")
 lbl2.place(relx=.32, rely=.49)
 countDown1()
+
+timeLabel = Label(file, text=0.000, font="Ebrima 20", width=10, anchor=E)
+timeLabel.config(bg="white")
+timeLabel.place(relx=.85, rely=.9)
 
 file.bind("<KeyRelease>", move)
 

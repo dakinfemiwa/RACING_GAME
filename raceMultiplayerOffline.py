@@ -82,7 +82,7 @@ def clock():
     while pos != 2:
         time.sleep(0.01)
         timing += (0.02 * (10/8))
-        print(timing)
+        #print(timing)
         timing = round(timing, 2)
         if pos != 1:
             timeLabel['text'] = timing
@@ -132,7 +132,7 @@ background2= "gray"
 instructions = "Press Q to move the top car\nPress M to move the bottom car"
 
 title = "RACERS"
-background = "lightgray"
+background = "black"
 background2= "black"
 bg2 = "#7A7A7A"
 pos = 0
@@ -143,11 +143,12 @@ file.geometry("1250x650+10+50")
 file.overrideredirect(1)
 file.config(bg=background)
 
-exitButton = Button(file, text= " ✖ ", command = close, font="Arial 20", bd=0, background="black", foreground="white", cursor="hand2")
-exitButton.place(relx=.95, rely=.0)
+exitButton = Button(file, text= " × ", command = close, font="Arial 35", bd=0, background="black", foreground="white", cursor="hand2")
+exitButton.place(relx=.95, rely=-.025)
 
-fileTitle = Label(file, text=title, background=background, font="Arial 29 bold underline")
-fileTitle.place(relx=.0, rely=.0)
+fileTitle = Label(file, text=title, background=background, font="Segoe 29")
+fileTitle.config(fg="white")
+fileTitle.place(relx=.0, rely=.025)
 
 gameCanvas = Canvas(file, width=1250, height=500, background=bg2, bd=0)
 gameCanvas.place(relx=.0, rely=.1)
@@ -194,6 +195,7 @@ def countDown1():
 lbl = Label()
 lbl.place(relx=.4, rely=.35)
 lbl2 = Label(file, text=instructions, font='fixedsys 15', bg=background)
+lbl2.config(fg="white")
 lbl2.place(relx=.32, rely=.5)
 
 timeLabel = Label(file, text=0.000, font="Ebrima 20", width=10, anchor=E)

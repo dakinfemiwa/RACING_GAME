@@ -101,8 +101,8 @@ class Player():
         self.exitButton = Button(self.file, text=" × ", command=lambda :self.close(), font="Arial 35", bd=0, background="black",foreground="white", cursor="hand2", activebackground="black", activeforeground="lightgray")
         self.exitButton.place(relx=.95, rely=-.025)
 
-        self.fileTitle = Label(self.file, text=self.title, background=self.background, font="Arial 29 bold", foreground=self.foreground)
-        self.fileTitle.place(relx=.0, rely=.0)
+        self.fileTitle = Label(self.file, text=self.title, background=self.background, font="Ebrima 29", foreground=self.foreground)
+        self.fileTitle.place(relx=.0, rely=.025)
 
         self.gameCanvas = Canvas(self.file, width=1250, height=500, background=self.bg2, bd=0)
         self.gameCanvas.place(relx=.0, rely=.1)
