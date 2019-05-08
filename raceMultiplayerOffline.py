@@ -11,11 +11,12 @@ def LeaderBoard():
     global leaderboard, cars
 
     bg2 = "#000000"
+    fg2 = "orange"
 
     leaderboard = Tk()
     leaderboard.overrideredirect(1)
     leaderboard.title("Leaderboard")
-    leaderboard.geometry("300x174+100+100")
+    leaderboard.geometry("300x174+500+300")
     leaderboard.config(bg=bg2)
     ranking = []
 
@@ -32,21 +33,21 @@ def LeaderBoard():
 
     #print(ranking)
 
-    titleLabel = Label(leaderboard, text=" LEADERBOARD ", font=font2, background=bg2, foreground="white", anchor=CENTER , justify=CENTER)
+    titleLabel = Label(leaderboard, text=" LEADERBOARD ", font=font2, background=bg2, foreground=fg2, anchor=CENTER , justify=CENTER)
     titleLabel.grid(row=0, column=0, columnspan=3, rowspan=1)
 
     for x in range(0, len(ranking)):
-        no = Label(leaderboard, text="  " + str(x+1)+ "  ", font=font, background=bg2, foreground="white")
+        no = Label(leaderboard, text="  " + str(x+1)+ "  ", font=font, background=bg2, foreground=fg2)
         no.grid(row=x+1, column=0, sticky="NSEW", rowspan=1, columnspan=2)
 
         if ranking[x][0] != "Car No 2" :
-            car = Label(leaderboard, text=ranking[x][0], font=font, background=bg2, foreground="white", anchor=W)
+            car = Label(leaderboard, text=ranking[x][0], font=font, background=bg2, foreground=fg2, anchor=W)
             car.grid(row=x+1, column=2, sticky="NSEW", rowspan=1, columnspan=1)
         else:
-            car = Label(leaderboard, text="You", font=font, background=bg2, foreground="white", anchor=W)
+            car = Label(leaderboard, text="You", font=font, background=bg2, foreground=fg2, anchor=W)
             car.grid(row=x+1, column=2, sticky="NSEW", rowspan=1, columnspan=1)
 
-        carTimes = Label(leaderboard, text=ranking[x][1], font=font, background=bg2, foreground="white", anchor=W)
+        carTimes = Label(leaderboard, text=ranking[x][1], font=font, background=bg2, foreground=fg2, anchor=W)
         carTimes.grid(row=x+1, column=3, sticky="NSEW", rowspan=1, columnspan=1)
 
     blank = Label(leaderboard, text="", font=font2,background=bg2)
@@ -57,7 +58,7 @@ def LeaderBoard():
     else:
         message = "Draw"
 
-    messageLabel = Label(leaderboard, text=message, font=font3, background=bg2, foreground="white", anchor=W)
+    messageLabel = Label(leaderboard, text=message, font=font3, background=bg2, foreground=fg2, anchor=W)
     messageLabel.grid(row=x+3, column=1, sticky="NSEW", rowspan=1, columnspan=3)
 
     leaderboard.mainloop()
