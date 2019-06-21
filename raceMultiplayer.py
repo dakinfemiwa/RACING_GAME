@@ -35,18 +35,18 @@ class Racing:
         self.Game_Canvas = Canvas(self.Game_Frame, width=1250, height=500, background="#7A7A7A", bd=0)
         self.Game_Canvas.place(relx=.0, rely=.1)
 
-        for x in range(6):
+        for x in range(2):
             photoImage = PhotoImage(file=f'racecar{x+1}.png')
             self.Game_Images.append(photoImage)
 
-        for car in range(6):
+        for car in range(2, 4):
             xValue = 10
             yValue = (75 * car) + 50
-            car1 = self.Game_Canvas.create_image(10, yValue, image=self.Game_Images[car])
+            car1 = self.Game_Canvas.create_image(10, yValue, image=self.Game_Images[car-2])
             self.Game_Cars.append([])
-            self.Game_Cars[car].append(car1)
-            self.Game_Cars[car].append(xValue)
-            self.Game_Cars[car].append(yValue)
+            self.Game_Cars[car-2].append(car1)
+            self.Game_Cars[car-2].append(xValue)
+            self.Game_Cars[car-2].append(yValue)
 
         for x in range(7):
             self.Game_Canvas.create_line(0, (75 * (x - 1) + 90), 1250, (75 * (x - 1) + 90), width=3, fill="white")
@@ -107,7 +107,7 @@ class Racing:
 
 
     def timer(self):
-        while self.Game_Position != 6:
+        while self.Game_Position != 2:
             time.sleep(0.01)
             self.Game_Timer += (0.01 * 3)
             self.Game_Timer = round(self.Game_Timer, 2)
@@ -120,18 +120,12 @@ class Racing:
         while self.Game_Active:
             time.sleep(0.003)
             for car in self.Game_Cars:
-                if car[1] < (.97 * 1250):
-                    if self.Game_Cars.index(car) != 1:
-                        change = random.randint(15, 55)
-                        change /= 10
-                        self.Game_Canvas.move(car[0], change, 0)
-                        car[1] += change
                 if car[1] >= (.925 * 1250):
                     if len(car) == 3:
                         self.Game_Position += 1
                         car.append(str(self.Game_Timer))
                         car.append(self.Game_Position)
-                if self.Game_Position == 6:
+                if self.Game_Position == 2:
                     Thread(target=self.ending).start()
                     self.Game_Active = False
 
@@ -141,6 +135,12 @@ class Racing:
                 xChange = random.randint(30, 35)
                 self.Game_Canvas.move(self.Game_Cars[1][0], xChange, 0)
                 self.Game_Cars[1][1] += xChange
+        if event.keysym.upper() == "Q":
+            if self.Game_Cars[0][1] < (.975 * 1250):
+                xChange = random.randint(30, 35)
+                self.Game_Canvas.move(self.Game_Cars[0][0], xChange, 0)
+                self.Game_Cars[0][1] += xChange
+
 
     def ending(self):
         self.scores()
