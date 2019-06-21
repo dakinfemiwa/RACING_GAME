@@ -22,7 +22,7 @@ class Updater:
 
         self.updateWindow = Tk()
         self.updateWindow.title()
-        self.updateWindow.geometry("500x300+100+100")
+        self.updateWindow.geometry("500x300+500+100")
         self.updateWindow.overrideredirect(1)
         self.updateWindow.config(bg=self.background1)
         self.design = Canvas(self.updateWindow, width=500, height=300, background=self.background1, bd=0)
@@ -39,11 +39,12 @@ class Updater:
         if self.needUpdate == True:
             self.updateMessage = "Updated to latest version"
             self.displayStatus(self.updateMessage)
-            time.sleep(7)
+            #time.sleep(7)
             self.updateWindow.destroy()
         else:
             self.updateMessage = "Updating your device"
             self.displayStatus(self.updateMessage)
+            #time.sleep(7)
             self.updateWindow.destroy()
             self.updateProgram()
 
@@ -63,15 +64,15 @@ class Updater:
         self.updateStatusLabel.place(relx=.075, rely=.4)
 
     def updateProgram(self):
-        file1 = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/race.py"
-        file2 = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/raceMultiplayerOffline.py"
+        file1 = "https://raw.githubusercontent.com/dakinfemiwa/RACING_GAME/master/raceOnePlayer.py"
+        file2 = "https://raw.githubusercontent.com/dakinfemiwa/RACING_GAME/master/raceMultiplayerOffline.py"
         file3 = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/versionNo.txt"
 
-        name1 = "raceNew.py"
+        name1 = "raceOnePlayer.py"
         name2 = "raceMultiplayerOfflineNew.py"
         name3 = "versionNoNew.txt"
 
-        oldFile1 = "race.py"
+        oldFile1 = "raceOnePlayer.py"
         oldFile2 = "raceMultiplayerOffline.py"
         oldFile3 = "versionNo.txt"
 
@@ -94,7 +95,7 @@ class Updater:
 
         os.rename("versionNo.txt", "versionNoC.txt")
 
-        source = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/versionNo"
+        source = "https://raw.githubusercontent.com/dakinfemiwa/RacingGame/master/versionNo.txt"
         file = "versionNo.txt"
 
         urllib.request.urlretrieve(source, file)
@@ -110,4 +111,3 @@ class Updater:
             return True
         else:
             return False
-
